@@ -1,0 +1,3 @@
+
+rootProject.name = "cauder-ui"
+
