@@ -3,11 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.4.30"
     id("org.openjfx.javafxplugin") version "0.0.9"
-    id("org.beryx.jlink") version "2.23.3"
+    id("org.beryx.runtime") version "1.12.1"
 }
-
-group = "es.upv.mist"
-version = "0.1"
 
 repositories {
     mavenCentral()
@@ -46,11 +43,10 @@ tasks.withType<KotlinCompile>() {
 }
 
 application {
-    mainModule.set("cauder")
     mainClass.set("es.upv.mist.cauder.MainKt")
     applicationDefaultJvmArgs = listOf(
-        "--add-opens=javafx.graphics/javafx.scene=tornadofx",
-        "--add-opens=javafx.controls/javafx.scene.control=tornadofx"
+        "--add-opens=javafx.graphics/javafx.scene=ALL-UNNAMED",
+        "--add-opens=javafx.controls/javafx.scene.control=ALL-UNNAMED"
     )
 }
 
@@ -59,12 +55,8 @@ javafx {
     modules = listOf("javafx.controls", "javafx.graphics", "javafx.fxml", "javafx.media", "javafx.swing", "javafx.web")
 }
 
-jlink {
+runtime {
     options.set(listOf("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages"))
-
-    launcher {
-        jvmArgs = application.applicationDefaultJvmArgs.toList()
-    }
 
     jpackage {
         val os = org.gradle.internal.os.OperatingSystem.current()
@@ -74,7 +66,5 @@ jlink {
             os.isLinux -> listOf("--linux-package-name", "cauder-ui", "--linux-shortcut")
             else -> error("Unexpected OS: $os")
         }
-
-        installerOptions = listOf("--resource-dir", "src/main/resources") + platformOptions
     }
 }
