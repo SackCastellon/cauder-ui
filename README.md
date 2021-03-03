@@ -55,12 +55,6 @@ To run the project, build a custom image and then type:
 
 Where `<cauder-path>` is the folder where you cloned the CauDEr v2 repository.
 
-Alternatively, you can also run the project from IntelliJ with the following configuration:
-
-- Main class: `es.upv.mist.cauder.MainKt`
-- Program arguments: `--dbg <cauder-path>/_build/default/lib/cauder/ebin`
-- Use classpath of module: `cauder-ui.main`
-
 
 #### Notes
 
