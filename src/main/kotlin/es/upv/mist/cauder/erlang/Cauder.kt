@@ -120,7 +120,7 @@ class Cauder(path: File) : AutoCloseable {
 
     companion object {
         private const val SELF_NAME = "cauder-ui"
-        private const val PEER_NAME = "cauder"
+        private const val PEER_NAME = "cauder@localhost"
         private const val COOKIE = "secret"
         private const val MODULE = "cauder"
 
